@@ -4,29 +4,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+    <Title>Ghost Net Fishing</Title>
+</h:head>
+<h:body>
+    <h1>
+        Ghost Net Fishing
+    </h1>
 
-    <h:dataTable var="person" value="#{personController.people}">
-        <h:column>
-            <h:outputText value="#{person.name}" />
-        </h:column>
-        <h:column>
-            <h:outputText value="#{person.phoneNumber}" />
-        </h:column>
-    </h:dataTable>
+    <!--<h:dataTable var="person" value="#{personController.people}">-->
+    <!--    <h:column>-->
+    <!--        <h:outputText value="#{person.name}" />-->
+    <!--    </h:column>-->
+    <!--    <h:column>-->
+    <!--        <h:outputText value="#{person.phoneNumber}" />-->
+    <!--    </h:column>-->
+    <!--</h:dataTable>-->
 
-    <h:dataTable var="ghostNet" value="#{netList.ghostNets}">
-        <h:column>
-            <h:outputText value="#{ghostNet.size}" />
-        </h:column>
-        <h:column>
-            <h:outputText value="#{ghostNet.status}" />
-        </h:column>
-        <h:column>
+    <p:dataTable var="ghostNet" value="#{netList.ghostNets}">
+        <p:column>
+            <f:facet name="header">Id</f:facet>
+            <h:outputText value="#{ghostNet.id}" />
+        </p:column>
+        <p:column>
+            <f:facet name="header">Standort</f:facet>
             <h:outputText value="#{ghostNet.location}" />
-        </h:column>
-    </h:dataTable>
-</f:view>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Größe [m^2]</f:facet>
+            <h:outputText value="#{ghostNet.size}" />
+        </p:column>
+        <p:column>
+            <f:facet name="header">Status</f:facet>
+            <h:outputText value="#{ghostNet.status}" />
+        </p:column>
+    </p:dataTable>
+
+    <p:button value="Melden" />
+    <p:button value="Bergen" />
+</h:body>
 </html>

@@ -11,6 +11,14 @@ public class GhostNet {
     @Enumerated(EnumType.STRING)
     private NetStatus status;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public GpsCoordinate getLocation() {
         return location;
     }

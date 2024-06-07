@@ -3,8 +3,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
+
 @Entity
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue
     private int id;

@@ -5,12 +5,13 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @ApplicationScoped
-public class PersonController {
+public class PersonController implements Serializable {
     private final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
     private List<Person> people = new ArrayList<>();
 
