@@ -14,6 +14,8 @@ public class NetList {
     private final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
     private List<GhostNet> ghostNets = new ArrayList<>();
 
+    public NetList() {}
+
     public List<GhostNet> getGhostNets() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT g FROM GhostNet g");

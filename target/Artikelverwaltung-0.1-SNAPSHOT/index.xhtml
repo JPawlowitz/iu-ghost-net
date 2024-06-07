@@ -9,6 +9,7 @@
 >
 <h:head>
     <Title>Ghost Net Fishing</Title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css"/>
 </h:head>
 <h:body>
     <h1>
@@ -24,26 +25,30 @@
     <!--    </h:column>-->
     <!--</h:dataTable>-->
 
-    <p:dataTable var="ghostNet" value="#{netList.ghostNets}">
-        <p:column>
-            <f:facet name="header">Id</f:facet>
-            <h:outputText value="#{ghostNet.id}" />
-        </p:column>
-        <p:column>
-            <f:facet name="header">Standort</f:facet>
-            <h:outputText value="#{ghostNet.location}" />
-        </p:column>
-        <p:column>
-            <f:facet name="header">Größe [m^2]</f:facet>
-            <h:outputText value="#{ghostNet.size}" />
-        </p:column>
-        <p:column>
-            <f:facet name="header">Status</f:facet>
-            <h:outputText value="#{ghostNet.status}" />
-        </p:column>
-    </p:dataTable>
+    <div class="container">
+        <p:dataTable var="ghostNet" value="#{netList.ghostNets}">
+            <p:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{ghostNet.id}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Standort</f:facet>
+                <h:outputText value="#{ghostNet.location}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Größe [m^2]</f:facet>
+                <h:outputText value="#{ghostNet.size}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Status</f:facet>
+                <h:outputText value="#{ghostNet.status}" />
+            </p:column>
+        </p:dataTable>
+    </div>
 
-    <p:button value="Melden" />
-    <p:button value="Bergen" />
+    <h:form styleClass="button-row">
+        <p:commandButton ajax="false" action="report" value="Melden" />
+        <p:commandButton ajax="false" action="recover" value="Bergen" />
+    </h:form>
 </h:body>
 </html>
