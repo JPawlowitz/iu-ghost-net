@@ -12,7 +12,7 @@ public class GpsCoordinate {
     private double seconds;
 
     public GpsCoordinate() {
-        this.hemisphere = Hemisphere.North;
+        this.hemisphere = Hemisphere.Norden;
         this.degrees = 0.0;
         this.minutes = 0.0;
         this.seconds = 0.0;
@@ -54,16 +54,16 @@ public class GpsCoordinate {
     public String toString() {
         String h = "";
         switch (hemisphere) {
-            case North:
+            case Norden:
                 h = "N";
                 break;
-            case South:
+            case Süden:
                 h = "S";
                 break;
-            case West:
+            case Westen:
                 h = "W";
                 break;
-            case East:
+            case Osten:
                 h = "E";
                 break;
         }

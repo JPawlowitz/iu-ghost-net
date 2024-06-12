@@ -1,4 +1,3 @@
-import jakarta.faces.model.SelectItem;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -9,7 +8,7 @@ import java.io.Serializable;
 @ViewScoped
 public class ReportController implements Serializable {
     @Inject
-    NetList list;
+    AppController list;
 
     private GhostNet ghostNet = new GhostNet();
     private String hemisphereValue = "North";
@@ -32,22 +31,22 @@ public class ReportController implements Serializable {
     public String save() {
         GpsCoordinate location = this.ghostNet.getLocation();
         switch(this.hemisphereValue) {
-            case "North": location.setHemisphere(Hemisphere.North);
+            case "Norden": location.setHemisphere(Hemisphere.Norden);
                 break;
-            case "South": location.setHemisphere(Hemisphere.South);
+            case "Süden": location.setHemisphere(Hemisphere.Süden);
                 break;
-            case "West": location.setHemisphere(Hemisphere.West);
+            case "Westen": location.setHemisphere(Hemisphere.Westen);
                 break;
-            case "East": location.setHemisphere(Hemisphere.East);
+            case "Osten": location.setHemisphere(Hemisphere.Osten);
                 break;
         }
         this.ghostNet.setLocation(location);
         list.addGhostNet(this.ghostNet);
 
-        return "index";
+        return "overview";
     }
 
     public String cancel() {
-        return "index";
+        return "overview";
     }
 }

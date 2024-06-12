@@ -1,6 +1,6 @@
 public enum Hemisphere {
-    North,
-    South,
-    East,
-    West,
+    Norden,
+    Süden,
+    Westen,
+    Osten,
 }

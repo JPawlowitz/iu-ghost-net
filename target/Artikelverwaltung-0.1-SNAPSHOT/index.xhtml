@@ -16,39 +16,35 @@
         Ghost Net Fishing
     </h1>
 
-    <!--<h:dataTable var="person" value="#{personController.people}">-->
-    <!--    <h:column>-->
-    <!--        <h:outputText value="#{person.name}" />-->
-    <!--    </h:column>-->
-    <!--    <h:column>-->
-    <!--        <h:outputText value="#{person.phoneNumber}" />-->
-    <!--    </h:column>-->
-    <!--</h:dataTable>-->
+    <h:form>
+        <div class="container">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Name" for="name" />
+                    </td>
+                    <td>
+                        <p:inputText id="name" value="#{personController.name}"
+                                     required="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:outputLabel value="Telefonnummer" for="phone" />
+                    </td>
+                    <td>
+                        <p:inputText id="phone" value="#{personController.phoneNumber}" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="container">
-        <p:dataTable var="ghostNet" value="#{netList.ghostNets}">
-            <p:column>
-                <f:facet name="header">Id</f:facet>
-                <h:outputText value="#{ghostNet.id}" />
-            </p:column>
-            <p:column>
-                <f:facet name="header">Standort</f:facet>
-                <h:outputText value="#{ghostNet.location}" />
-            </p:column>
-            <p:column>
-                <f:facet name="header">Größe [m^2]</f:facet>
-                <h:outputText value="#{ghostNet.size}" />
-            </p:column>
-            <p:column>
-                <f:facet name="header">Status</f:facet>
-                <h:outputText value="#{ghostNet.status}" />
-            </p:column>
-        </p:dataTable>
-    </div>
-
-    <h:form styleClass="button-row">
-        <p:commandButton ajax="false" action="report" value="Melden" />
-        <p:commandButton ajax="false" action="recover" value="Bergen" />
+        <div class="button-row">
+            <p:commandButton ajax="false" action="#{personController.report()}" value="Melden" />
+            <p:commandButton ajax="false" action="#{personController.salvage()}" value="Bergen" />
+        </div>
     </h:form>
 </h:body>
 </html>

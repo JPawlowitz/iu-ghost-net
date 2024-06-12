@@ -1,6 +1,6 @@
 public enum NetStatus {
-    Reported,
-    InRecovery,
-    Recovered,
-    Lost,
+    Gemeldet,
+    Bergung,
+    Geborgen,
+    Verschollen,
 }

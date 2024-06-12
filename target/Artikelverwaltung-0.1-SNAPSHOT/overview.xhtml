@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+    <Title>Ghost Net Fishing</Title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css"/>
+</h:head>
+<h:body>
+    <h1>
+        Ghost Net Fishing
+    </h1>
+
+    <p>
+        <p:outputLabel value="Hallo #{appController.user.name}!"/>
+    </p>
+
+    <div class="container">
+        <p:dataTable var="ghostNet" value="#{appController.ghostNets}">
+            <p:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{ghostNet.id}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Standort</f:facet>
+                <h:outputText value="#{ghostNet.location}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Größe [m^2]</f:facet>
+                <h:outputText value="#{ghostNet.size}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Status</f:facet>
+                <h:outputText value="#{ghostNet.status}" />
+            </p:column>
+            <p:column rendered="#{appController.userIsSalvager()}">
+                <f:facet name="header">Bergende Person</f:facet>
+                <h:outputText value="#{ghostNet.salvager.name}" />
+            </p:column>
+            <p:column rendered="#{appController.userIsSalvager()}">
+                <f:facet name="header">Status aktualisieren</f:facet>
+                <h:form style="display: flex; flex-direction: column; gap: 0.5em;">
+                    <p:commandButton ajax="false" value="Bergen"
+                                     rendered="#{ghostNet.status eq 'Gemeldet'}" />
+                    <p:commandButton ajax="false" value="Bergung abbrechen"
+                                     rendered="#{ghostNet.salvager.name eq appController.user.name and ghostNet.status eq 'Bergung'}"
+                                     style="background-color: #cc0000; border-color: #aa0000"
+                    />
+                    <p:commandButton ajax="false" value="Geborgen"
+                                     rendered="#{ghostNet.salvager.name eq appController.user.name and ghostNet.status eq 'Bergung'}"
+                                     style="background-color: #00cc00; border-color: #00aa00"
+                    />
+                </h:form>
+            </p:column>
+            <p:column rendered="#{appController.userIsSalvager()}">
+                <f:facet name="header">Verschollen melden</f:facet>
+                <h:form>
+                    <p:commandButton rendered="#{ghostNet.status ne 'Geborgen'}" ajax="false" value="Verschollen" />
+                </h:form>
+            </p:column>
+        </p:dataTable>
+    </div>
+
+    <h:form>
+        <p:commandButton ajax="false" action="report" value="Neue Meldung" />
+    </h:form>
+</h:body>
+</html>

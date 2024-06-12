@@ -1,18 +1,14 @@
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
-    @Column(nullable = true)
-    private String phoneNumber;
+    private String name = "";
 
     public int getId() {
         return id;
@@ -30,11 +26,4 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

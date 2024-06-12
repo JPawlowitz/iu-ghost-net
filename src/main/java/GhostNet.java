@@ -10,11 +10,15 @@ public class GhostNet {
     private int size;
     @Enumerated(EnumType.STRING)
     private NetStatus status;
+    @OneToOne
+    private Reporter reporter;
+    @ManyToOne
+    private Salvager salvager;
 
     public GhostNet() {
         this.location = new GpsCoordinate();
         this.size = 0;
-        this.status = NetStatus.Reported;
+        this.status = NetStatus.Gemeldet;
     }
 
     public int getId() {
@@ -47,5 +51,21 @@ public class GhostNet {
 
     public void setStatus(NetStatus status) {
         this.status = status;
+    }
+
+    public Reporter getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(Reporter reporter) {
+        this.reporter = reporter;
+    }
+
+    public Salvager getSalvager() {
+        return salvager;
+    }
+
+    public void setSalvager(Salvager salvager) {
+        this.salvager = salvager;
     }
 }
