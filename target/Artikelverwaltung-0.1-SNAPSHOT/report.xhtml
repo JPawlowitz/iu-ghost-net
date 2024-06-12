@@ -12,15 +12,87 @@
     <link rel="stylesheet" type="text/css" media="screen" href="index.css"/>
 </h:head>
 <h:body>
-    <h:form>
-        <h1>
-            Geisternetz melden
-        </h1>
+    <h1>
+        Geisternetz melden
+    </h1>
 
-        <div class="button-row">
-            <p:commandButton ajax="false" action="index" value="Zurück" />
-            <p:commandButton ajax="false" value="Bestätigen" />
-        </div>
-    </h:form>
+    <div>
+        <h:form>
+            <table style="margin-bottom: 1em">
+                <tbody>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Hemisphäre" for="hemisphere" />
+                        </td>
+                        <td>
+                            <p:selectOneMenu id="hemisphere" value="#{reportController.hemisphereValue}">
+                                <f:selectItem itemLabel="North" itemValue="North"/>
+                                <f:selectItem itemLabel="South" itemValue="South"/>
+                                <f:selectItem itemLabel="West" itemValue="West"/>
+                                <f:selectItem itemLabel="East" itemValue="East"/>
+                            </p:selectOneMenu>
+<!--                            <p:inputText id="hemisphere" value="#{reportController.ghostNet.location.hemisphere}"-->
+<!--                                         required="true" />-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Grad" for="degrees" />
+                        </td>
+                        <td>
+
+                            <div class="ui-inputgroup">
+                                <p:inputNumber id="degrees" value="#{reportController.ghostNet.location.degrees}"
+                                               required="true" />
+                                <div class="ui-inputgroup-addon">°</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Minuten" for="minutes" />
+                        </td>
+                        <td>
+                            <div class="ui-inputgroup">
+                                <p:inputNumber id="minutes" value="#{reportController.ghostNet.location.minutes}"
+                                               required="true" />
+                                <div class="ui-inputgroup-addon">'</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Sekunden" for="seconds" />
+                        </td>
+                        <td>
+                            <div class="ui-inputgroup">
+                                <p:inputNumber id="seconds" value="#{reportController.ghostNet.location.seconds}"
+                                               required="true" />
+                                <div class="ui-inputgroup-addon">"</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Größe" for="size" />
+                        </td>
+                        <td>
+                            <div class="ui-inputgroup">
+                                <p:inputNumber id="size" value="#{reportController.ghostNet.size}"
+                                               required="true" />
+                                <div class="ui-inputgroup-addon">m^2</div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="button-row">
+                <p:commandButton ajax="false" action="#{reportController.save()}" value="Bestätigen" />
+                <p:commandButton ajax="false" action="#{reportController.cancel()}" value="Zurück" />
+            </div>
+        </h:form>
+    </div>
 </h:body>
 </html>

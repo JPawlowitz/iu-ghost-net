@@ -3,13 +3,20 @@ import jakarta.persistence.*;
 @Entity
 public class GpsCoordinate {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     @Enumerated(EnumType.STRING)
     private Hemisphere hemisphere;
     private double degrees;
     private double minutes;
     private double seconds;
+
+    public GpsCoordinate() {
+        this.hemisphere = Hemisphere.North;
+        this.degrees = 0.0;
+        this.minutes = 0.0;
+        this.seconds = 0.0;
+    }
 
     public Hemisphere getHemisphere() {
         return hemisphere;

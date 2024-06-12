@@ -12,3 +12,7 @@ body {
     flex-direction: row;
     gap: 1em
 }
+
+.row {
+    display: flex;
+}

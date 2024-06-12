@@ -3,13 +3,19 @@ import jakarta.persistence.*;
 @Entity
 public class GhostNet {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private GpsCoordinate location;
     private int size;
     @Enumerated(EnumType.STRING)
     private NetStatus status;
+
+    public GhostNet() {
+        this.location = new GpsCoordinate();
+        this.size = 0;
+        this.status = NetStatus.Reported;
+    }
 
     public int getId() {
         return id;
