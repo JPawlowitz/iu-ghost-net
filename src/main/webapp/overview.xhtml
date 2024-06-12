@@ -21,8 +21,8 @@
     </p>
 
     <div class="container">
-        <p:dataTable var="ghostNet" value="#{appController.ghostNets}">
-            <p:column>
+        <p:dataTable var="ghostNet" value="#{overviewController.ghostNets}">
+            <p:column sortBy="#{ghostNet.id}" sortOrder="ascending" sortPriority="1">
                 <f:facet name="header">Id</f:facet>
                 <h:outputText value="#{ghostNet.id}" />
             </p:column>
@@ -34,40 +34,70 @@
                 <f:facet name="header">Größe [m^2]</f:facet>
                 <h:outputText value="#{ghostNet.size}" />
             </p:column>
-            <p:column>
+            <p:column sortBy="#{ghostNet.status}">
                 <f:facet name="header">Status</f:facet>
                 <h:outputText value="#{ghostNet.status}" />
             </p:column>
+            <p:column>
+                <f:facet name="header">Gemeldet von</f:facet>
+                <div style="display: flex; flex-direction: column;">
+                    <div>
+                        <h:outputText value="#{ghostNet.reporter.name}" />
+                    </div>
+                    <h:outputText rendered="#{ghostNet.reporter.phoneNumber ne null}"
+                                  value="Tel: #{ghostNet.reporter.phoneNumber}"
+                                  style="font-weight: lighter;"
+                    />
+                </div>
+            </p:column>
             <p:column rendered="#{appController.userIsSalvager()}">
                 <f:facet name="header">Bergende Person</f:facet>
-                <h:outputText value="#{ghostNet.salvager.name}" />
+                <div>
+                    <h:outputText value="#{ghostNet.salvager.name}" />
+                </div>
+                <h:outputText
+                        value="Tel: #{ghostNet.salvager.phoneNumber}"
+                        style="font-weight: lighter;"
+                />
             </p:column>
             <p:column rendered="#{appController.userIsSalvager()}">
                 <f:facet name="header">Status aktualisieren</f:facet>
                 <h:form style="display: flex; flex-direction: column; gap: 0.5em;">
                     <p:commandButton ajax="false" value="Bergen"
-                                     rendered="#{ghostNet.status eq 'Gemeldet'}" />
+                                     rendered="#{ghostNet.status eq 'Gemeldet'}"
+                                     action="#{overviewController.setNetStatusRecovery(ghostNet)}"
+                    />
                     <p:commandButton ajax="false" value="Bergung abbrechen"
                                      rendered="#{ghostNet.salvager.name eq appController.user.name and ghostNet.status eq 'Bergung'}"
                                      style="background-color: #cc0000; border-color: #aa0000"
+                                     action="#{overviewController.setNetStatusRecoveryCancelled(ghostNet)}"
                     />
                     <p:commandButton ajax="false" value="Geborgen"
                                      rendered="#{ghostNet.salvager.name eq appController.user.name and ghostNet.status eq 'Bergung'}"
                                      style="background-color: #00cc00; border-color: #00aa00"
+                                     action="#{overviewController.setNetStatusRecovered(ghostNet)}"
                     />
                 </h:form>
             </p:column>
             <p:column rendered="#{appController.userIsSalvager()}">
                 <f:facet name="header">Verschollen melden</f:facet>
                 <h:form>
-                    <p:commandButton rendered="#{ghostNet.status ne 'Geborgen'}" ajax="false" value="Verschollen" />
+                    <p:commandButton rendered="#{ghostNet.status ne 'Geborgen' and ghostNet.status ne 'Verschollen'}"
+                                     ajax="false" value="Verschollen"
+                                     action="#{overviewController.setNetStatusLost(ghostNet)}" />
                 </h:form>
             </p:column>
         </p:dataTable>
     </div>
 
     <h:form>
-        <p:commandButton ajax="false" action="report" value="Neue Meldung" />
+        <div class="button-col">
+            <p:commandButton ajax="false" action="report" value="Neue Meldung" />
+            <p:commandButton ajax="false" styleClass="ui-button-danger"
+                             action="#{overviewController.logout()}"
+                             value="Abmelden" />
+        </div>
+        />
     </h:form>
 </h:body>
 </html>

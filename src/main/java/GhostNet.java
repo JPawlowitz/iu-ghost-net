@@ -10,9 +10,9 @@ public class GhostNet {
     private int size;
     @Enumerated(EnumType.STRING)
     private NetStatus status;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Reporter reporter;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Salvager salvager;
 
     public GhostNet() {

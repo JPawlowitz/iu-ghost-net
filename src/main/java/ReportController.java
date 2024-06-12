@@ -8,7 +8,7 @@ import java.io.Serializable;
 @ViewScoped
 public class ReportController implements Serializable {
     @Inject
-    AppController list;
+    AppController appController;
 
     private GhostNet ghostNet = new GhostNet();
     private String hemisphereValue = "North";
@@ -41,12 +41,19 @@ public class ReportController implements Serializable {
                 break;
         }
         this.ghostNet.setLocation(location);
-        list.addGhostNet(this.ghostNet);
+        this.ghostNet.setReporter(appController.getReporter());
+
+        appController.addGhostNet(this.ghostNet);
 
         return "overview";
     }
 
     public String cancel() {
-        return "overview";
+        if (appController.userIsSalvager()) {
+            return "overview";
+        }
+
+        appController.setUser(null);
+        return "index";
     }
 }

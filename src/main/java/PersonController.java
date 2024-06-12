@@ -41,7 +41,7 @@ public class PersonController implements Serializable {
         reporter.setPhoneNumber(this.phoneNumber);
         appController.setUser(reporter);
 
-        return "overview";
+        return "report";
     }
 
     public String salvage() {
