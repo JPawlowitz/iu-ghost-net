@@ -13,3 +13,12 @@ body {
     gap: 1em;
     max-width: 200px;
 }
+
+.error-message {
+    color: #CC0000;
+}
+
+.input-col {
+    display: flex;
+    flex-direction: column;
+}

@@ -35,6 +35,10 @@ public class PersonController implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public void validatePhoneNumber() {
+
+    }
+
     public String report() {
         Reporter reporter = new Reporter();
         reporter.setName(this.name);
