@@ -15,7 +15,7 @@ public class AppController {
     }
 
     public void addGhostNet(GhostNet ghostNet) {
-        ghostNetDAO.persist(ghostNet);
+        ghostNetDAO.merge(ghostNet);
     }
 
     public Person getUser() {

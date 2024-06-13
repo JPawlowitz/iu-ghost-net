@@ -16,74 +16,175 @@
     </h1>
 
     <h:form>
-        <table style="margin-bottom: 1em">
-            <tbody>
-            <tr>
-                <td>
-                    <p:outputLabel value="Hemisphäre" for="hemisphere" />
-                </td>
-                <td>
-                    <p:selectOneMenu id="hemisphere" value="#{reportController.hemisphereValue}">
+        <p>
+            <p:outputLabel for="format" value="DMS / Dezimal" />
+            <p:toggleSwitch id="format" value="#{reportController.decimalFormat}">
+                <p:ajax event="change" update="grid" />
+            </p:toggleSwitch>
+        </p>
+
+        <p:panelGrid id="grid">
+            <p:row>
+                <p:column> </p:column>
+                <p:column>Längengrad</p:column>
+                <p:column>Breitengrad</p:column>
+            </p:row>
+            <p:row rendered="#{!reportController.decimalFormat}">
+                <p:column>
+                    <p:outputLabel value="Hemisphäre" />
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+
+                    </div>
+                    <p:selectOneMenu id="hemisphereLong" value="#{reportController.hemisphereLong}">
                         <f:selectItem itemLabel="Norden" itemValue="Norden"/>
                         <f:selectItem itemLabel="Süden" itemValue="Süden"/>
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+
+                    </div>
+                    <p:selectOneMenu id="hemisphereLat" value="#{reportController.hemisphereLat}">
                         <f:selectItem itemLabel="Westen" itemValue="Westen"/>
                         <f:selectItem itemLabel="Osten" itemValue="Osten"/>
                     </p:selectOneMenu>
-                    <!--                            <p:inputText id="hemisphere" value="#{reportController.ghostNet.location.hemisphere}"-->
-                    <!--                                         required="true" />-->
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p:outputLabel value="Grad" for="degrees" />
-                </td>
-                <td>
+                </p:column>
+            </p:row>
 
-                    <div class="ui-inputgroup">
-                        <p:inputNumber id="degrees" value="#{reportController.ghostNet.location.degrees}"
-                                       required="true" />
-                        <div class="ui-inputgroup-addon">°</div>
+            <p:row rendered="#{!reportController.decimalFormat}">
+                <p:column>
+                    <p:outputLabel value="Grad" />
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="degreesLong" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="degreesLong" value="#{reportController.ghostNet.longitude.degrees}"
+                                           required="true">
+                                <f:validateLongRange minimum="-180" maximum="180" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">°</div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p:outputLabel value="Minuten" for="minutes" />
-                </td>
-                <td>
-                    <div class="ui-inputgroup">
-                        <p:inputNumber id="minutes" value="#{reportController.ghostNet.location.minutes}"
-                                       required="true" />
-                        <div class="ui-inputgroup-addon">'</div>
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="degreesLat" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="degreesLat" value="#{reportController.ghostNet.latitude.degrees}"
+                                           required="true">
+                                <f:validateLongRange minimum="-90" maximum="90" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">°</div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p:outputLabel value="Sekunden" for="seconds" />
-                </td>
-                <td>
-                    <div class="ui-inputgroup">
-                        <p:inputNumber id="seconds" value="#{reportController.ghostNet.location.seconds}"
-                                       required="true" />
-                        <div class="ui-inputgroup-addon">"</div>
+                </p:column>
+            </p:row>
+
+            <p:row rendered="#{!reportController.decimalFormat}">
+                <p:column>
+                    <p:outputLabel value="Minuten" />
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="minutesLong" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="minutesLong" value="#{reportController.ghostNet.longitude.minutes}"
+                                           required="true">
+                                <f:validateLongRange minimum="0" maximum="60" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">'</div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="minutesLat" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="minutesLat" value="#{reportController.ghostNet.latitude.minutes}"
+                                           required="true">
+                                <f:validateLongRange minimum="0" maximum="60" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">'</div>
+                        </div>
+                    </div>
+                </p:column>
+            </p:row>
+
+            <p:row rendered="#{!reportController.decimalFormat}">
+                <p:column>
+                    <p:outputLabel value="Sekunden" />
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="secondsLong" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="secondsLong" value="#{reportController.ghostNet.longitude.seconds}"
+                                           required="true">
+                                <f:validateLongRange minimum="0" maximum="60" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">"</div>
+                        </div>
+                    </div>
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="secondsLat" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="secondsLat" value="#{reportController.ghostNet.latitude.seconds}"
+                                           required="true">
+                                <f:validateLongRange minimum="0" maximum="60" />
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">"</div>
+                        </div>
+                    </div>
+                </p:column>
+            </p:row>
+
+            <p:row rendered="#{reportController.decimalFormat}">
+                <p:column>
+                    <p:outputLabel value="Dezimal" />
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="long" styleClass="error-message" />
+                        <p:inputNumber id="long" value="#{reportController.decimalLong}"
+                                       required="true">
+                            <f:validateLongRange minimum="-180" maximum="180"/>
+                        </p:inputNumber>
+                    </div>
+                </p:column>
+                <p:column>
+                    <div class="input-col">
+                        <h:message for="lat" styleClass="error-message" />
+                        <p:inputNumber id="lat" value="#{reportController.decimalLat}"
+                                       required="true">
+                            <f:validateLongRange minimum="-90" maximum="90"/>
+                        </p:inputNumber>
+                    </div>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
                     <p:outputLabel value="Größe" for="size" />
-                </td>
-                <td>
-                    <div class="ui-inputgroup">
-                        <p:inputNumber id="size" value="#{reportController.ghostNet.size}"
-                                       required="true" />
-                        <div class="ui-inputgroup-addon">m^2</div>
+                </p:column>
+                <p:column colspan="2">
+                    <div class="input-col">
+                        <h:message for="size" styleClass="error-message" />
+                        <div class="ui-inputgroup">
+                            <p:inputNumber id="size" value="#{reportController.ghostNet.size}"
+                                           required="true">
+                                <f:validateLongRange minimum="0"/>
+                            </p:inputNumber>
+                            <div class="ui-inputgroup-addon">m^2</div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+                </p:column>
+            </p:row>
+        </p:panelGrid>
 
         <div class="button-col" style="margin-top: 2em">
             <p:commandButton ajax="false" action="#{reportController.save()}" value="Bestätigen" />

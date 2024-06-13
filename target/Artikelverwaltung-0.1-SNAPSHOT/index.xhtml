@@ -25,7 +25,7 @@
                     </td>
                     <td class="input-col">
                         <h:message for="name" styleClass="error-message" />
-                        <p:inputText id="name" value="#{personController.name}"
+                        <p:inputText id="name" value="#{loginController.name}"
                                      required="true" />
                     </td>
                 </tr>
@@ -35,7 +35,7 @@
                     </td>
                     <td class="input-col">
                         <h:message for="phone" styleClass="error-message" />
-                        <p:inputText id="phone" value="#{personController.phoneNumber}"
+                        <p:inputText id="phone" value="#{loginController.phoneNumber}"
                                      required="#{param['skipPhoneValidation'] eq 'false'}"/>
                     </td>
                 </tr>
@@ -44,10 +44,10 @@
         </div>
 
         <div style="display: flex; gap: 1em;">
-            <p:commandButton id="report" ajax="false" action="#{personController.report()}" value="Melden">
+            <p:commandButton id="report" ajax="false" action="#{loginController.report()}" value="Melden">
                 <f:param name="skipPhoneValidation" value="true" />
             </p:commandButton>
-            <p:commandButton id="salvage" ajax="false" action="#{personController.salvage()}" value="Bergen">
+            <p:commandButton id="salvage" ajax="false" action="#{loginController.salvage()}" value="Bergen">
                 <f:param name="skipPhoneValidation" value="false" />
             </p:commandButton>
         </div>

@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 @Entity
 public class GpsCoordinate {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Enumerated(EnumType.STRING)
     private Hemisphere hemisphere;
@@ -48,6 +48,24 @@ public class GpsCoordinate {
 
     public void setSeconds(double seconds) {
         this.seconds = seconds;
+    }
+
+    public static GpsCoordinate fromDecimal(double decimal) {
+        GpsCoordinate coordinate = new GpsCoordinate();
+        //Grad
+        String decimalString = Double.toString(decimal);
+        String truncString = decimalString.split("[.]")[0];
+        coordinate.setDegrees(Double.parseDouble(truncString));
+
+        double abs = Math.abs(decimal - coordinate.getDegrees());
+        //Minuten
+        String absString = Double.toString(60.0 * abs);
+        String absTruncString = absString.split("[.]")[0];
+        coordinate.setMinutes(Double.parseDouble(absTruncString));
+        //Sekunden
+        coordinate.setSeconds(3600 * abs - 60 * coordinate.getMinutes());
+
+        return coordinate;
     }
 
     @Override

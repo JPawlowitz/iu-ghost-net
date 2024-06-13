@@ -28,7 +28,10 @@
             </p:column>
             <p:column>
                 <f:facet name="header">Standort</f:facet>
-                <h:outputText value="#{ghostNet.location}" />
+                <div style="display: flex; flex-direction: column;">
+                    <h:outputText value="#{ghostNet.longitude}," />
+                </div>
+                <h:outputText value="#{ghostNet.latitude}" />
             </p:column>
             <p:column>
                 <f:facet name="header">Größe [m^2]</f:facet>
@@ -97,7 +100,6 @@
                              action="#{overviewController.logout()}"
                              value="Abmelden" />
         </div>
-        />
     </h:form>
 </h:body>
 </html>

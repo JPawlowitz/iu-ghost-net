@@ -3,10 +3,12 @@ import jakarta.persistence.*;
 @Entity
 public class GhostNet {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne(cascade = CascadeType.ALL)
-    private GpsCoordinate location;
+    private GpsCoordinate longitude;
+    @OneToOne(cascade = CascadeType.ALL)
+    private GpsCoordinate latitude;
     private int size;
     @Enumerated(EnumType.STRING)
     private NetStatus status;
@@ -16,7 +18,8 @@ public class GhostNet {
     private Salvager salvager;
 
     public GhostNet() {
-        this.location = new GpsCoordinate();
+        this.longitude = new GpsCoordinate();
+        this.latitude = new GpsCoordinate();
         this.size = 0;
         this.status = NetStatus.Gemeldet;
     }
@@ -29,12 +32,20 @@ public class GhostNet {
         this.id = id;
     }
 
-    public GpsCoordinate getLocation() {
-        return location;
+    public GpsCoordinate getLongitude() {
+        return longitude;
     }
 
-    public void setLocation(GpsCoordinate location) {
-        this.location = location;
+    public void setLongitude(GpsCoordinate longitude) {
+        this.longitude = longitude;
+    }
+
+    public GpsCoordinate getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(GpsCoordinate latitude) {
+        this.latitude = latitude;
     }
 
     public int getSize() {
