@@ -10,7 +10,7 @@
     <Title>Ghost Net Fishing - Anmeldung</Title>
     <link rel="stylesheet" type="text/css" media="screen" href="index.css"/>
 </h:head>
-<h:body>
+<h:body style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <h1>
         Ghost Net Fishing
     </h1>
@@ -43,11 +43,11 @@
             </table>
         </div>
 
-        <div style="display: flex; gap: 1em;">
-            <p:commandButton id="report" ajax="false" action="#{loginController.report()}" value="Melden">
+        <div style="display: flex; gap: 1em; justify-content: center">
+            <p:commandButton id="report" ajax="false" action="#{loginController.report()}" value="Melden" style="width: 100%;">
                 <f:param name="skipPhoneValidation" value="true" />
             </p:commandButton>
-            <p:commandButton id="salvage" ajax="false" action="#{loginController.salvage()}" value="Bergen">
+            <p:commandButton id="salvage" ajax="false" action="#{loginController.salvage()}" value="Bergen" style="width: 100%;">
                 <f:param name="skipPhoneValidation" value="false" />
             </p:commandButton>
         </div>
