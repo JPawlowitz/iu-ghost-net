@@ -26,8 +26,8 @@
         <p:panelGrid id="grid">
             <p:row>
                 <p:column> </p:column>
-                <p:column>Längengrad</p:column>
                 <p:column>Breitengrad</p:column>
+                <p:column>Längengrad</p:column>
             </p:row>
             <p:row rendered="#{!reportController.decimalFormat}">
                 <p:column>
@@ -176,7 +176,7 @@
                         <div class="ui-inputgroup">
                             <p:inputNumber id="size" value="#{reportController.ghostNet.size}"
                                            required="true">
-                                <f:validateLongRange minimum="0"/>
+                                <f:validateLongRange minimum="1"/>
                             </p:inputNumber>
                             <div class="ui-inputgroup-addon">m^2</div>
                         </div>

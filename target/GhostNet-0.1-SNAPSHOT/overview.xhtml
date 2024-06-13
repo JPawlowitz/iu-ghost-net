@@ -47,7 +47,7 @@
                     <div>
                         <h:outputText value="#{ghostNet.reporter.name}" />
                     </div>
-                    <h:outputText rendered="#{ghostNet.reporter.phoneNumber ne null}"
+                    <h:outputText rendered="#{ghostNet.reporter.phoneNumber ne null and ghostNet.reporter.phoneNumber ne ''}"
                                   value="Tel: #{ghostNet.reporter.phoneNumber}"
                                   style="font-weight: lighter;"
                     />
@@ -60,6 +60,7 @@
                 </div>
                 <h:outputText
                         value="Tel: #{ghostNet.salvager.phoneNumber}"
+                        rendered="#{ghostNet.salvager ne null}"
                         style="font-weight: lighter;"
                 />
             </p:column>
@@ -85,7 +86,8 @@
             <p:column rendered="#{appController.userIsSalvager()}">
                 <f:facet name="header">Verschollen melden</f:facet>
                 <h:form>
-                    <p:commandButton rendered="#{ghostNet.status ne 'Geborgen' and ghostNet.status ne 'Verschollen'}"
+                    <p:commandButton rendered="#{ghostNet.status eq 'Gemeldet' or (ghostNet.status eq 'Bergung'
+                    and ghostNet.salvager.name eq appController.user.name)}"
                                      ajax="false" value="Verschollen"
                                      action="#{overviewController.setNetStatusLost(ghostNet)}" />
                 </h:form>
