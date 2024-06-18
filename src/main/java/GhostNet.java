@@ -20,7 +20,7 @@ public class GhostNet {
     public GhostNet() {
         this.longitude = new GpsCoordinate();
         this.latitude = new GpsCoordinate();
-        this.size = 0;
+        this.size = 1;
         this.status = NetStatus.Gemeldet;
     }
 

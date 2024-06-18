@@ -6,30 +6,30 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class GhostNetDAO {
-    EntityManager em;
+    private EntityManager entityManager;
 
     public GhostNetDAO() {
-        em = Persistence.createEntityManagerFactory("default").createEntityManager();
+        entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
     }
 
     public List<GhostNet> findAll() {
-        Query q = em.createQuery("select g from GhostNet g");
+        Query q = entityManager.createQuery("select g from GhostNet g");
         List<GhostNet> result = q.getResultList();
 
         return result;
     }
 
     public void merge(GhostNet ghostNet) {
-        EntityTransaction t = em.getTransaction();
+        EntityTransaction t = entityManager.getTransaction();
         t.begin();
-        em.merge(ghostNet);
+        entityManager.merge(ghostNet);
         t.commit();
     }
 
     public void persist(GhostNet ghostNet) {
-        EntityTransaction t = em.getTransaction();
+        EntityTransaction t = entityManager.getTransaction();
         t.begin();
-        em.persist(ghostNet);
+        entityManager.persist(ghostNet);
         t.commit();
     }
 }

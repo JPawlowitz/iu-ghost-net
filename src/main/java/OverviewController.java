@@ -27,24 +27,24 @@ public class OverviewController implements Serializable {
         this.ghostNets = ghostNets;
     }
 
-    public void setNetStatusRecoveryCancelled(GhostNet ghostNet) {
+    public void setRecoveryCancelled(GhostNet ghostNet) {
         ghostNet.setStatus(NetStatus.Gemeldet);
         ghostNet.setSalvager(null);
         ghostNetDAO.merge(ghostNet);
     }
 
-    public void setNetStatusRecovery(GhostNet ghostNet) {
+    public void setRecovery(GhostNet ghostNet) {
         ghostNet.setStatus(NetStatus.Bergung);
         ghostNet.setSalvager((Salvager)appController.getUser());
         ghostNetDAO.merge(ghostNet);
     }
 
-    public void setNetStatusRecovered(GhostNet ghostNet) {
+    public void setRecovered(GhostNet ghostNet) {
         ghostNet.setStatus(NetStatus.Geborgen);
         ghostNetDAO.merge(ghostNet);
     }
 
-    public void setNetStatusLost(GhostNet ghostNet) {
+    public void setLost(GhostNet ghostNet) {
         ghostNet.setStatus(NetStatus.Verschollen);
         ghostNetDAO.merge(ghostNet);
     }
